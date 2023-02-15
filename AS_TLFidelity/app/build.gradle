@@ -1,0 +1,57 @@
+apply plugin: 'com.android.application'
+
+android {
+    namespace 'com.retexspa.tecnologica.tlmoduloloyalty'
+    def stdout = new ByteArrayOutputStream()
+    exec {
+        workingDir '.'
+        commandLine 'svn', 'info', '--show-item', 'revision'
+        standardOutput = stdout;
+    }
+    def code = Integer.parseInt(stdout.toString().replaceAll("\\D", ""))
+
+    compileSdkVersion 33
+    buildToolsVersion '33.0.0'
+    defaultConfig {
+        applicationId "com.retexspa.tecnologica.tlmoduloloyalty"
+        minSdkVersion 21
+        targetSdkVersion 33
+        versionCode code
+        versionName "1.0." + code.toString()
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility = 1.8
+        targetCompatibility = 1.8
+    }
+}
+
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation 'androidx.appcompat:appcompat:1.7.0-alpha01'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+    implementation 'androidx.preference:preference:1.2.0'
+
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.1'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+
+    implementation 'com.google.mlkit:barcode-scanning:17.0.2'
+
+}
+
+dependencies {
+    implementation 'androidx.camera:camera-core:1.1.0'
+    implementation 'androidx.camera:camera-camera2:1.1.0'
+    implementation 'androidx.camera:camera-lifecycle:1.1.0'
+    implementation 'androidx.camera:camera-view:1.1.0'
+    implementation 'androidx.appcompat:appcompat:+'
+    implementation 'androidx.constraintlayout:constraintlayout:+'
+}

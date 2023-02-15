@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="it-IT">
+    <head>
+        <meta http-equiv="content-language" content="it">
+        <style type="text/css">
+        @font-face {
+            font-family: Crai;
+            src: url("Biondi Sans W00 Regular.woff2");
+        }
+        body {
+            overflow-y: scroll;
+            overflow-x: hidden;
+            margin: 0;
+        }
+        div {
+            width: 100vw;
+            display: block;
+            position: relative;
+        }
+        #parte_a {
+            background: url("file:///android_res/drawable/sfondo_m1.png");
+            height:  62.67vw;
+            background-repeat: no-repeat;
+            background-size: 100%;
+        }
+        div input {
+            position: absolute;
+            background-color: transparent;
+            border: 0px solid white;
+            font-size: 1.4vw;
+            height: 2.8vw;
+            width: 73.4vw;
+            padding-left: 1.6vw;
+            padding-right: 1.6vw;
+            padding-top: 1.0vw;
+            left: 11.4vw;
+        }
+        #messaggio {
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 1.9vw;
+            position: absolute;
+            top: 20.4vw;
+            left: 11.5vw;
+            width: 76.5vw;
+        }
+        .centra {
+            text-align: center;
+        }
+        #ok {
+            top: 57.7vw;
+            left: 37.0vw;
+            width: 25vw;
+            height: 4vw;
+            font-size: 2.5vw;
+            font-family: Crai;
+            color: white;
+        }
+        #ok:disabled {
+            color: #BBB;
+        }
+
+        .barBtn {
+            position: absolute;
+            border-radius: 50%;
+            background-color: transparent;
+            box-shadow: none;
+            transition: background-color 0.1s, box-shadow 0.1s;
+            width: 5.5vw;
+            height: 5.5vw;
+        }
+        .barBtn:active {
+            background-color: rgba(255,255,255,0.5);
+            box-shadow: 0 0 10px white;
+        }
+        #back {
+            top:3.5vw;
+            left: 4.0vw;
+        }
+        #camera {
+            top: 50.0vw;
+            right: 6vw;
+        }
+        #camera:active {
+            background-color: rgba(128,128,128,0.5);
+            box-shadow: 0 0 10px gray;
+        }
+        #cognome {
+            top: 34.5vw;
+        }
+        #nome {
+            top: 42.5vw;
+        }
+        #tessera {
+            top: 51.0vw;
+        }
+        .error {
+            background: url("ic_warning.svg");
+            background-repeat: no-repeat;
+            background-position: right;
+        }
+
+          #footer {
+            background: url("file:///android_res/drawable/sfondo_m2.png");
+            height:  5.9vw;
+            background-repeat: no-repeat;
+            background-size: 100%;
+            top: 5.0vw;
+        }
+    </style>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <script>
+            function check(cosa, come) {
+                var campo = $(cosa);
+                var ok = come? come(campo.val()) : campo.val().length>1;
+                campo.toggleClass("error", !ok)
+                return ok;
+            }
+            function controllaDatiObbligatori() {
+                var ok=true;
+                ok &= check("#cognome");
+                ok &= check("#nome");
+                ok &= check("#tessera", (v)=> tecno.checkTessera(v) );
+                $("#ok").prop('disabled', !ok);
+            }
+            function SetTessera(value) {
+                $("#tessera").val(value);
+                controllaDatiObbligatori();
+            }
+            $(function () {
+                $("#ok").on("click", () => tecno.vaiAvanti( $("#cognome").val(),$("#nome").val(),$("#tessera").val() ) );
+                $("#back").on("click", () => tecno.vaiIndietro());
+                $("#camera").on("click", () => tecno.vaiCamera() );
+
+                $("input").change(() => {
+                    // change serve per i radio e i check
+                    controllaDatiObbligatori();
+                    tecno.DataWritten();
+                }).on('input',(e) => {
+                    // input serve per le caselle di testo
+                    controllaDatiObbligatori();
+                    tecno.DataWritten();
+                }).focus(function () {
+                     var center = $(window).height() / 2;
+                     var top = $(this).offset().top;
+                     var dy = window.scrollY;
+                     console.log(this.id+" top:"+ top+" center:"+center+" dy:"+dy+ " -> "+(center+dy));
+                     if (top > (center+dy)) {
+                         $('html, body').animate({ scrollTop: top - center }, 'fast');
+                     } /*else if (top<dy) {
+                        $('html, body').animate({ scrollTop: top }, 'fast');
+                     }*/
+                 });
+
+                try {
+                 //   $("#tessera").val(tecno.getBaseTessera());
+                } catch(e) {};
+
+                /*$("#tessera").autocomplete({  7/4/2020 tolto auto completamento nelle tessere
+                    minLength: 0,
+                    source: (request, response)=> {
+                        $.getJSON("tl:/carte", { emesse: true, term: request.term }, response)
+                    },
+                    select: (e,ui) => {
+                        e.target.value=ui.item.label;
+                        controllaDatiObbligatori();
+                    }
+                });*/
+            });
+    </script>
+    </head>
+    <body><form>
+            <div id="parte_a">
+                <img id="back" src="ic_arrow_back.svg"  class="barBtn">
+                <input class="error" id="cognome" type="text" placeholder="Rossi">
+                <input class="error" id="nome" type="text"  placeholder="Andrea" >
+                <input class="error" id="tessera" type="tel"  placeholder="0400000000000">
+                <img id="camera" src="ic_photo_camera.svg"  class="barBtn">
+                <input type="button" value="PROCEDI" id="ok" >
+            </div>
+            <!--<p class="centra">-->
+                <!--input type="button" value="Invia segnalazione" id="ok" -->
+
+            <!--</p>-->
+        </form>
+        <div id="footer"></div>
+    </body>
+</html>

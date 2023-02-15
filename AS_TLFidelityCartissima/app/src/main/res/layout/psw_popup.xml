@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    android:padding="10dip"
+    android:visibility="visible"
+    tools:visibility="visible"
+    android:id="@+id/linearLayout">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:layout_weight="2"
+        android:padding="20dp"
+        android:layout_gravity="center">
+    <TextView
+        android:id="@+id/pswTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/pswLabel"
+        android:labelFor="@+id/pswText"
+        android:textSize="14sp" />
+
+    <EditText
+        android:id="@+id/pswText"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:contentDescription="@string/pswDesc"
+        android:ems="10"
+        android:inputType="textPassword"
+        android:selectAllOnFocus="true"
+        android:singleLine="true" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:layout_weight="2"
+        android:padding="20dp"
+        android:layout_gravity="center">
+    <Button
+        android:id="@+id/okPsw"
+        android:layout_width="0dp"
+        android:layout_weight="10"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:padding="10dp"
+        android:enabled="true"
+        android:text="Ok"/>
+
+    <Button
+        android:id="@+id/cancel"
+        android:layout_width="0dp"
+        android:layout_weight="10"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:enabled="true"
+        android:padding="10dp"
+        android:text="Cancella"
+        android:onClick="vaiIndietro"/>
+    </LinearLayout>
+</LinearLayout>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Users/l.sola/AndroidStudioProjects/AS_TLFidelityCartissima/app/src/main/res/font/crai.xml" value="0.284375" />
+        <entry key="..\:/Users/l.sola/AndroidStudioProjects/AS_TLFidelityCartissima/app/src/main/res/layout/otp_popup.xml" value="0.13802083333333334" />
+        <entry key="..\:/Users/l.sola/AndroidStudioProjects/AS_TLFidelityCartissima/app/src/main/res/menu/main_menu.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/l.sola/AndroidStudioProjects/AS_TLFidelityCartissima/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.2703125" />
+        <entry key="..\:/Users/l.sola/AndroidStudioProjects/AS_TLFidelityCartissima/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.2703125" />
+      </map>
+    </option>
+  </component>
+  <component name="EntryPointsManager">
+    <list size="1">
+      <item index="0" class="java.lang.String" itemvalue="android.webkit.JavascriptInterface" />
+    </list>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+  <component name="SvnBranchConfigurationManager">
+    <option name="myConfigurationMap">
+      <map>
+        <entry key="$PROJECT_DIR$">
+          <value>
+            <SvnBranchConfiguration>
+              <option name="trunkUrl" value="https://fogbugz.tecnologica.info:8443/svn/AS_TLFidelity" />
+            </SvnBranchConfiguration>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+</project>

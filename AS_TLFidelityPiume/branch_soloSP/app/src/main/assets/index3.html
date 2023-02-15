@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="it-IT">
+    <head>
+        <meta http-equiv="content-language" content="it">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+        <style type="text/css">
+        @font-face {
+            font-family: Crai;
+            src: url("ASIFAWMyriadPro-Semibold.woff2");
+        }
+        body {
+            overflow-y: scroll;
+            overflow-x: hidden;
+            margin: 0;
+            background-color: white;
+        }
+        div {
+            width: 100vw;
+            display: block;
+            position: relative;
+        }
+        #parte_a {
+            background: url("./android_res/drawable/sfondo_piume_gimp.png");
+            height:  128.7vw;
+            background-repeat: no-repeat;
+            background-size: 100%;
+            overflow: visible;
+        }
+        #footer {
+            background: url("./android_res/drawable/sfondo_toolbar.png");
+            height:  5.9vw;
+            background-repeat: no-repeat;
+            background-size: 100%;
+        }
+        div input {
+            position: absolute;
+            background-color: transparent;
+            border: 1px solid red;
+            font-size: 1.4vw;
+            height: 2.8vw;
+            width: 73.6vw;
+            padding-left: 1.6vw;
+            padding-right: 1.6vw;
+            padding-top: 1.0vw;
+            left: 11.3vw;
+        }
+        #cognome {
+            top: 14.3vw;
+        }
+        #nome {
+            top: 22.6vw;
+        }
+        #cellulare {
+            top: 31.1vw;
+        }
+        #email {
+            top: 39.5vw;
+        }
+        #nascita {
+            top: 3.5vw;
+            width: 54.0vw;
+        }
+        input[name="sesso"]+label {
+            width: 12vw;
+            height: 3vw;
+            font-size: 2vw;
+            background-color: transparent;
+            border: 1px solid transparent;
+            cursor: pointer;
+            overflow: visible;
+            display: block;
+            position: absolute;
+        }
+
+        input[name="sesso"] {
+            opacity: 0;
+            left: -100;
+            width: 0vw;
+            height: 0vw;
+        }
+        input[name="sesso"]:checked+label::after {
+            content:"\2B24";
+            font-size: 1.3vw;
+            line-height: 0vw;
+            position: absolute;
+            top: 1.4vw;
+            right: 0.6vw;
+        }
+        #sessoM, #sessoM+label {
+            left: 73.1vw;
+            top: 4.7vw;
+        }
+        #sessoF, #sessoF+label {
+            left: 73.1vw;
+            top: 0.8vw;
+        }
+        .warning {
+            position: absolute;
+            width: 3.8vw;
+            height: 3.8vw;
+        }
+        #sessoObl {
+            left: 86vw;
+            top: 2vw;
+        }
+
+        #cittaNascita {
+            top: 11.7vw;
+        }
+        #codFiscale {
+            top: 20.2vw;
+        }
+        #indirizzo {
+            top: 28.8vw;
+        }
+        #civico {
+            top: 37.0vw;
+            width: 14vw;
+        }
+        #citta {
+            top: 37.0vw;
+            left: 30.5vw;
+            width: 54.4vw;
+        }
+        #cap {
+            top: 45.4vw;
+            width: 14vw;
+        }
+        #prov {
+            top: 45.4vw;
+            left: 30.5vw;
+            width: 54.4vw;
+        }
+        input.auth+label {
+            width: 21vw;
+            height: 3vw;
+            font-size: 2vw;
+            background-color: transparent;
+            border: 1px solid transparent;
+            cursor: pointer;
+            overflow: visible;
+            display: block;
+            position: absolute;
+        }
+
+        input.auth {
+            /*display: none;*/
+            opacity: 0;
+            left: -100;
+            width: 0vw;
+            height: 0vw;
+        }
+        input.auth:checked+label::after {
+            content:"\2713";
+            font-size: 2.6vw;
+            line-height: 0vw;
+            position: absolute;
+            top: 1.2vw;
+            right: 0.3vw;
+        }
+        .authS, .authS+label {
+            left: 11vw;
+            width: 16vw !important;
+        }
+        .authN, .authN+label {
+            left: 35vw;
+        }
+        .auth1, .auth1+label {
+            top: 67.8vw;
+        }
+        .auth2, .auth2+label {
+            top: 9vw;
+        }
+        .auth3, .auth3+label {
+            top: 5.5vw;
+        }
+        #auth1Obl {
+            left: 60vw;
+            top: 67.4vw;
+        }
+        #auth2Obl {
+            left: 60vw;
+            top: 8.6vw;
+        }
+        #auth3Obl {
+            left: 60vw;
+            top: 5.1vw;
+        }
+
+        #auth3Msg {
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 1.4vw;
+            position: absolute;
+            top: 1.5vw;
+            left: 11.5vw;
+            width: 76.5vw;
+        }
+        #dataFirma1 {
+            left: 16vw;
+            top: 11.4vw;
+            width: 16vw;
+        }
+
+        #firma1 {
+            position: absolute;
+            width: 30vw;
+            height: 10vw;
+            position: absolute;
+            top: 8.4vw;
+            left: 50vw;
+            border: 1px dotted black;
+        }
+
+        .barBtn {
+            position: absolute;
+            border-radius: 50%;
+            background-color: transparent;
+            box-shadow: none;
+            transition: background-color 0.1s, box-shadow 0.1s;
+            width: 5.5vw;
+            height: 5.5vw;
+        }
+        .barBtn:active {
+            background-color: rgba(255,255,255,0.5);
+            box-shadow: 0 0 10px white;
+        }
+        #back {
+            top:0.5vw;
+            left: 3.5vw;
+        }
+        .centra {
+            text-align: center;
+        }
+        #ok {
+            width: 25vw;
+            height: 4vw;
+            font-size: 2.5vw;
+            font-family: Crai;
+        }
+        #ok:disabled {
+            color: #BBB;
+        }
+        .error {
+            background: url("ic_warning.svg");
+            background-repeat: no-repeat;
+            background-position: right;
+        }
+
+        .ui-tooltip {
+            padding: 0.5vw;
+            color: black;
+            background-color: yellow;
+            border-radius: 0.3vw;
+            font-family: Arial, Helvetica, sans-serif;
+            width: 40vw;
+            max-width: 40vw;
+            box-shadow: none;
+            border: none;
+        }
+        #emailError {
+            position: absolute;
+            border-radius: 0.3vw;
+            top:43.5vw;
+            left:20vw;
+            width: 20vw;
+            padding: 0.5vw;
+            background: yellow;
+            /*border: 1px solid black;*/
+            font-family: Arial, Helvetica, sans-serif;
+            z-index: 1000;
+
+        }
+
+        #informativa {
+            position: absolute;
+            top: 56vw;
+            left: 11vw;
+            width: 17.5vw;
+            height: 2.5vw;
+            cursor: pointer; /*inutile su android*/
+            /* border: 1px solid black; */
+        }
+    </style>
+
+    <script>
+        function check(cosa, come) {
+            var campo = $(cosa);
+            var ok = campo.val().length>1;
+            if(come) try {
+                ok = come? come(campo.val()) : campo.val().length>1;
+            } catch(ex) { }
+            campo.toggleClass("error", !ok)
+            return ok;
+        }
+        function controllaNascita(txt) {
+            txt = txt.replace(/\D/g,"/");
+            var primaB = txt.indexOf("/");
+            if(primaB<0) return false;
+            var secondaB = txt.indexOf("/",primaB+1);
+            if(secondaB<0) return false;
+            var giorno = parseInt(txt.substr(0,primaB))
+            var mese = parseInt(txt.substring(primaB+1,secondaB))
+            var anno =txt.substr(secondaB+1);
+            var oggi = new Date();
+            return giorno>0 && giorno<=31 && mese>0 && mese<=12 && anno.length==4 && anno>1900 && anno<=oggi.getFullYear().toString().padStart(4,"0");
+        }
+        function checkRadio(nome) {
+            var ok = $("input[name='"+nome+"']:checked").length>0;
+            $("#"+nome+"Obl").toggle(!ok);
+            return ok;
+        }
+        function controllaDatiObbligatori() {
+            var ok=true;
+            ok &= check("#cognome");
+            ok &= check("#nome");
+            ok &= check("#cellulare");
+            ok &= check("#nascita", controllaNascita );
+            ok &= check("#cittaNascita", (v)=> tecno.checkCitta(v,""));
+            //ok &= check("#provNascita", (v)=> tecno.checkProv(v,  $("#cittaNascita").val()));
+            ok &= check("#codFiscale");
+            ok &= check("#indirizzo");
+            //ok &= check("#civico");
+            ok &= check("#citta", (v)=> tecno.checkCitta(v, $("#prov").val()));
+            ok &= check("#cap", (v)=> tecno.checkCap(v, $("#citta").val(), $("#prov").val()));
+            ok &= check("#prov", (v)=> tecno.checkProv(v, $("#citta").val()));
+            ok &= checkRadio("sesso");
+            ok &= checkRadio("auth1");
+            ok &= checkRadio("auth2");
+            ok &= checkRadio("auth3");
+            try {
+                ok &= tecno.haFirme();
+            } catch(ex) {}
+            $("#ok").prop('disabled', !ok);
+              // scritte a scompara
+
+                    var val = $("#email").val();
+                    if(/^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/.test(val))
+                        $("#parte2a").slideUp();
+                    else
+                        $("#parte2a").slideDown();
+
+
+                    if($("#auth1N")[0].checked)
+                        $("#parte3a").slideDown();
+                    else
+                        $("#parte3a").slideUp();
+
+
+                    if($("#auth2N")[0].checked)
+                        $("#parte4a").slideDown();
+                    else
+                        $("#parte4a").slideUp();
+
+        }
+            $(function () {
+                $( document ).tooltip();
+                // $("#codFiscale").tooltip().tooltip("open"); // per test
+                $("input").change(() => {
+                    // change serve per i radio e i check
+                    controllaDatiObbligatori();
+                    try { tecno.DataWritten(); } catch(ex) {}
+                }).on('input',(e) => {
+                    // input serve per le caselle di testo
+                    controllaDatiObbligatori();
+                    try { tecno.DataWritten(); } catch(ex) {}
+                }).focus(function () {
+                     var center = $(window).height() / 2;
+                     var top = $(this).offset().top;
+                     var dy = window.scrollY;
+                     console.log(this.id+" top:"+ top+" center:"+center+" dy:"+dy+ " -> "+(center+dy));
+                     if (top > (center+dy)) {
+                         $('html, body').animate({ scrollTop: top - center }, 'fast');
+                     } /*else if (top<dy) {
+                        $('html, body').animate({ scrollTop: top }, 'fast');
+                     }*/
+                 });
+                // metto i punti esclamativi
+                controllaDatiObbligatori();
+                // scritte a scompara
+                $("#email").on("input",(e)=>{
+                    var val = e.target.value
+                    if(/^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/.test(val))
+                        $("#parte2a").slideUp();
+                    else
+                        $("#parte2a").slideDown();
+                });
+                $('input.auth1').on("change",(e)=>{
+                    if($("#auth1S")[0].checked)
+                        $("#parte3a").slideUp();
+                    else
+                        $("#parte3a").slideDown();
+                });
+                $('input.auth2').on("change",(e)=>{
+                    if($("#auth2S")[0].checked)
+                        $("#parte4a").slideUp();
+                    else
+                        $("#parte4a").slideDown();
+                });
+                //date della firma e controllo maggiore età
+                var oggi = new Date();
+                var day = oggi.getDate().toString().padStart(2,"0");
+                var month = (oggi.getMonth() + 1).toString().padStart(2,"0");
+                var year = oggi.getFullYear().toString().padStart(4,"0");
+                var maggiorenni = (oggi.getFullYear()-18);
+                oggi = year + "-" + month + "-" + day;
+                $("#dataFirma1").val(oggi);
+                // input nascita
+                $('#nascita').on('keydown',(e)=>{
+                    e.target.lastBack=e.keyCode == 8 || e.keyCode == 46;
+                }).on('input',(e) => {
+                    var txt = e.target.value.replace(/\D/g,"/").replace(/\/\//g,"/");
+                    if(txt!=e.target.value)  e.target.value = txt;
+                    var primaB = txt.indexOf("/");
+                    if(primaB<0) {
+                        // sta inserendo il giorno
+                        var giorno = parseInt(txt);
+                        if(giorno>31) { // non è possibile, passo al mese
+                            txt=((giorno/10)|0).toString(); //|0 per convertire in int
+                            if(txt.length==1) txt="0"+txt;
+                            txt+="/"+(giorno%10).toString();
+                        } else if(giorno>3 && giorno<10)  {
+                            // dal 4 in poi considero il giorno immesso e vado avanti
+                            txt="0"+txt.replace("0","");
+                        } else if(txt.length>2) {
+                            //non dovrebbe succedere...
+                            txt=txt.substr(0,2)+"/"+txt.substr(2);
+                        }
+                        // se il giorno è lungo 2 metto la barra per passare al mese
+                        if(txt.length==2  && !e.target.lastBack) txt+="/"
+                        e.target.value = txt;
+                        return;
+                    }
+                    if(primaB==txt.length-1) {
+                        //la barra è l'ultima lettera, se 'sta cancellando la elimino
+                        if(e.target.lastBack)
+                            e.target.value = txt.substr(0,primaB);
+                        return;
+                    }
+                    var secondaB = txt.indexOf("/",primaB+1);
+                    if(secondaB<0) {
+                         // sta inserendo il mese
+                        var primaParte = txt.substr(0,primaB+1); //parte col giorno, costante
+                        txt=txt.substr(primaB+1);
+                        var mese = parseInt(txt);
+                        if(mese>12) { // non è possibile, passo all'anno
+                            txt=((mese/10)|0).toString(); //|0 per convertire in int
+                            if(txt.length==1) txt="0"+txt;
+                            txt+="/"+(mese%10).toString();
+                        } else if(mese>1 && mese<10) {
+                            // dal mese 2 in poi lo considero immeso
+                            txt="0"+txt.replace("0","");
+                        } else if(txt.length>2) {
+                            //non dovrebbe succedere...
+                            txt=txt.substr(0,2)+"/"+txt.substr(2);
+                        }
+                        // se il mese è lungo 2 metto la barra per passare all'anno
+                        if(txt.length==2  && !e.target.lastBack) txt+="/"
+                        e.target.value = primaParte+txt;
+                        return;
+                    }
+                    if(secondaB==txt.length-1) {
+                        //la barra è l'ultima lettera, se 'sta cancellando la elimino
+                        if(e.target.lastBack)
+                            e.target.value = txt.substr(0,secondaB);
+                        return;
+                    }
+                    // codice per l'anno non necessario...
+                    // magari un controllo per evitare valori assurdi tipo lungo 5 o
+                    // sopra l'anno degli appena maggiorenni
+                    //var primaParte = txt.substr(0,secondaB+1);
+                    //var anno = txt.substr(secondaB+1);
+                    //if(!anno.startsWith("19") && !anno.startsWith("20")) {
+                    //
+                    //}
+                }).on("focusout",(e)=>{
+                    var txt = e.target.value.replace(/\D/g,"/");
+                    var primaB = txt.indexOf("/");
+                    if(primaB<0) return;
+                    var secondaB = txt.indexOf("/",primaB+1);
+                    if(secondaB<0) return;
+                    var giorno = parseInt(txt.substr(0,primaB)).toString();
+                    var mese = parseInt(txt.substring(primaB+1,secondaB));
+                    var anno = parseInt(txt.substr(secondaB+1));
+                    if(isNaN(giorno) || isNaN(mese) || isNaN(anno)) return;
+                    mese = mese.toString();
+                    if(giorno.length==1) giorno="0"+giorno;
+                    if(mese.length==1) mese="0"+mese;
+                    if(anno<100) {
+                        // solo 2 cifre per l'anno, gli aggiungo le altre 2 per coerenza
+                        if(anno+2000<=maggiorenni) anno+=2000; else anno+=1900;
+                    }
+                    e.target.value = giorno+"/"+mese+"/"+anno;
+                });
+                // autcompletamenti geofrafici
+                $( ".citta" ).autocomplete({
+                    source:  function (request, response) {
+                        $.getJSON("tl:/citta", { id: this.element[0].id, term: request.term }, response)
+                    },
+                    select: (e,ui) => {
+                        $.getJSON("tl:/infoCitta", { citta: ui.item.label }, (data)=>{
+                            if(e.target.id=="citta" && data.cap.length==1)
+                                $("#cap").val(data.cap[0]);
+                            if(data.prov.length==1) {
+                                if(e.target.id!="cittaNascita")
+                                    $("#prov").val(data.prov);
+                            }
+                            controllaDatiObbligatori();
+                            $("#codFiscale").focus();
+                        })
+                    }
+                });
+                /*$("#provNascita").autocomplete({
+                    minLength: 0,
+                    source: (request, response)=> {
+                        $.getJSON("tl:/provincie", { citta: $('#cittaNascita').val(), term: request.term }, response)
+                    },
+                    select: (e,ui) => {
+                        e.target.value=ui.item.label;
+                        controllaDatiObbligatori();
+                    }
+                }).focus(function() { $(this).autocomplete("search") } );*/
+                $("#prov").autocomplete({
+                    minLength: 0,
+                    source: (request, response)=> {
+                        $.getJSON("tl:/provincie", { citta: $('#citta').val(), term: request.term }, response)
+                    },
+                    select: (e,ui) => {
+                        e.target.value=ui.item.label;
+                        controllaDatiObbligatori();
+                    }
+                }).focus(function() { $(this).autocomplete("search") } );
+                $("#cap").autocomplete({
+                    minLength: 0,
+                    source: (request, response)=> {
+                        $.getJSON("tl:/cap", { citta: $('#citta').val(), term: request.term }, response)
+                    },
+                    select: (e,ui) => {
+                        e.target.value=ui.item.label;
+                        controllaDatiObbligatori();
+                    }
+                }).focus(function() { $(this).autocomplete("search") } );
+                // parti cliccabili
+                $("#firma1").on("click", firmaClick);
+                $("#ok").on("click", () => tecno.salvaCliente(JSON.stringify($("form").serializeArray())));
+                $("#back").on("click", () => tecno.vaiIndietro());
+                // sostituzione scritte
+                $.getJSON("tl:/infoPV",SetPV).fail(()=>{
+                    SetPV({"descrizione": "Punto Vendita di Debug", "cedi": "Sviluppo"});
+                });
+                // preriempimento firma
+                $("[codFiscale]").change(controllaCF).on('input',controllaCF);
+                // mostra informativa
+                $("#informativa").on("click", () => tecno.mostraInformativa());
+            });
+            function firmaClick(e) {
+                var rect = e.target.getBoundingClientRect();
+                var id= parseInt(e.target.id.substr(5));
+                tecno.faiFirma(id,rect.x,rect.y,rect.width,rect.height);
+
+            }
+            function SetPV(data) {
+                $("#auth3Msg").text((id,str) => {
+                    if(str.indexOf("{")>=0) {
+                        str=str.replace(/{NOME PUNTO VENDITA}/g,data.cedi);
+                        return str;
+                    }
+                });
+            }
+            function SetCliente(data) {
+                console.log(data);
+                for (const campo in data) {
+                    if (data.hasOwnProperty(campo)) {
+                        const info = data[campo];
+                        var ele = $("[name="+campo+"]");
+                        if(ele.length==1)
+                            ele.val(info)
+                        if(ele.length>1 && info.length>0) {
+                            var subEle = ele.filter("[value="+info+"]");
+                            if(subEle.length>0)
+                                subEle[0].checked = true;
+                            else
+                                console.warn("valore "+info+" dentro l'elemento "+campo+" non trovato");
+                        }
+                        if(ele.length==0) {
+                            console.warn("elemento "+campo+" non trovato");
+                        }
+                    }
+                }
+                controllaDatiObbligatori();
+            }
+
+            function controllaCF() {
+                $("#codFiscale").val(tecno.getCodiceFiscale(
+                        $("#cognome").val(),
+                        $("#nome").val(),
+                        $("#nascita").val(),
+                        !$("#sessoF")[0].checked,
+                        $("#cittaNascita").val()/*,
+                        $("#provNascita").val()*/));
+            }
+
+            function checkEmail() {
+                var currentEmail = $("#email").val();
+                if (currentEmail.length!=0 && !(/^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/.test( currentEmail))) {
+                    $("#emailError").slideDown();
+                } else {
+                    $("#emailError").slideUp();
+                }
+
+            }
+
+            function emailErrorUp() {
+                $("#emailError").slideUp();
+            }
+
+
+    </script>
+    </head>
+    <body> <form>
+        <div id="parte_a">
+            <img id="back" src="ic_arrow_back.svg"  class="barBtn">
+            <input name="cognome" id="cognome" type="text" placeholder="Rossi" codFiscale="si">
+            <input name="nome" id="nome" type="text"  placeholder="Andrea"  codFiscale="si">
+            <input name="cellulare" id="cellulare" type="tel" placeholder="0039335010203">
+            <input name="email" id="email" type="email" placeholder="rossi.andrea@gmail.com"  onfocusout="checkEmail()" onfocus="emailErrorUp()" >
+            <div id="emailError" style="display:none;">Indirizzo email errato</div>
+
+
+            <input name="dataNascita" id="nascita" type="tel" placeholder="10/03/1974"  codFiscale="si">
+            <input name="sesso" value="M" id="sessoM" type="radio" codFiscale="si"><label for="sessoM"></label>
+            <input name="sesso" value="F" id="sessoF" type="radio" codFiscale="si"><label for="sessoF"></label>
+            <img id="sessoObl" class="warning" src="ic_warning.svg">
+            <input name="cittaNascita" id="cittaNascita" type="text" class="citta" placeholder="Milano (MI)"  codFiscale="si">
+            <input name="codFiscale" id="codFiscale" type="text" placeholder="RSSNDR74C10F205W"
+                title="Le consigliamo di verificare il codice fiscale calcolato.">
+            <input name="indirizzo" id="indirizzo" type="text" placeholder="Via Rossi">
+            <input name="civico" id="civico" type="text" placeholder="10">
+            <input name="citta" id="citta" type="text" class="citta" placeholder="Milano">
+            <input name="cap" id="cap" type="number" placeholder="20100">
+            <input name="prov" id="prov" type="text" placeholder="MI">
+            <div id="informativa"></div>
+            <input class="auth authS auth1" value="S" id="auth1S" type="radio" name="auth1"> <label for="auth1S"></label>
+            <input class="auth authN auth1" value="N" id="auth1N" type="radio" name="auth1"> <label for="auth1N"></label>
+            <img id="auth1Obl" class="warning" src="ic_warning.svg">
+
+            <input name="auth2" value="S" class="auth authS auth2" id="auth2S" type="radio"> <label for="auth2S"></label>
+            <input name="auth2" value="N" class="auth authN auth2" id="auth2N" type="radio"> <label for="auth2N"></label>
+            <img id="auth2Obl" class="warning" src="ic_warning.svg">
+
+            <div id="auth3Msg">Acconsento al trasferimento dei dati alle società socie o partecipate da CRAI SECOM
+                e/o da {NOME PUNTO VENDITA} ovvero ad altri Centri Distributivi CRAI.
+            </div>
+            <input name="auth3" value="S" class="auth authS auth3" id="auth3S" type="radio"> <label for="auth3S"></label>
+            <input name="auth3" value="N" class="auth authN auth3" id="auth3N" type="radio"> <label for="auth3N"></label>
+            <img id="auth3Obl" class="warning" src="ic_warning.svg">
+            <input name="dataFirma" id="dataFirma1" type="date" lang="it" data-date-format="DD/MM/YY">
+            <img src="tl:/firma1.png"  id="firma1">
+
+        </div>
+        <p class="centra">
+            <input type="button" value="Procedi" id="ok" disabled>
+        </p>
+    </form>
+    <div id="footer"></div>
+    </body>
+</html>

@@ -1,0 +1,50 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:buttonStyle">@style/bottoni</item>
+        <item name="android:textViewStyle">@style/testi</item>
+        <item name="android:editTextStyle">@style/caselle</item>
+        <item name="android:alertDialogTheme">@style/dialogs</item>
+    </style>
+
+    <style name="AppThemeNoActionBar" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:buttonStyle">@style/bottoni</item>
+        <item name="android:textViewStyle">@style/testi</item>
+        <item name="android:editTextStyle">@style/caselle</item>
+        <item name="android:alertDialogTheme">@style/dialogs</item>
+    </style>
+
+    <style name="bottoni" parent="android:Widget.Button">
+        <item name="android:fontFamily">@font/crai</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:background">@android:drawable/btn_default</item>
+    </style>
+    <style name="testi" parent="android:Widget.TextView">
+        <item name="android:fontFamily">@font/crai</item>
+        <item name="android:textColor">@color/colorPrimary</item>
+    </style>
+    <style name="testiBianchi" parent="testi">
+        <item name="android:textColor">@android:color/white</item>
+    </style>
+    <style name="caselle" parent="android:Widget.EditText">
+        <item name="android:fontFamily">@font/comicneue_bold</item>
+    </style>
+    <style name="dialogs" parent="android:Theme.Material.Dialog.Alert">
+        <item name="android:windowBackground">@drawable/dialog_box</item>
+        <item name="android:editTextColor">@android:color/white</item>
+        <item name="android:textViewStyle">@style/testiBianchi</item>
+        <item name="android:fontFamily">@font/crai</item>
+        <item name="android:buttonStyle">@style/bottoni</item>
+        <item name="android:buttonBarButtonStyle">@style/bottoni</item>
+        <item name="android:editTextStyle">@style/caselle</item>
+    </style>
+
+</resources>

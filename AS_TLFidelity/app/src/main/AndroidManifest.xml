@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- uso dei webservice -->
+    <uses-permission android:name="android.permission.INTERNET" android:required="true" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" android:required="true" />
+    <!-- scansione tessera -->
+    <uses-permission android:name="android.permission.CAMERA" android:required="true" />
+    <!-- ottenere il MAC -->
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" android:required="true" />
+    <!-- installazione aggiornamenti -->
+    <!--
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" android:required="true" />
+    -->
+    <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" android:required="true" />
+    <!-- Geolocalizzazione -->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" android:required="true" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" android:required="true" />
+
+    <uses-feature android:name="android.hardware.camera" />
+    <uses-feature
+        android:name="android.hardware.camera.autofocus"
+        android:required="false" />
+    <uses-feature
+        android:name="android.hardware.camera.flash"
+        android:required="false" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppThemeNoActionBar"
+        android:usesCleartextTraffic="true">
+        <activity android:name=".InfoPVActivity" android:theme="@style/AppTheme" />
+        <activity android:name=".ScanActivity" />
+        <activity
+            android:name=".RegolamentoActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize|layoutDirection|uiMode"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".WebServiceSetupActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize|layoutDirection|uiMode"
+            android:label="@string/title_activity_web_service_setup"
+            android:parentActivityName=".menuPrincipaleActivity"
+            android:theme="@style/AppTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.retexspa.tecnologica.tlmoduloloyalty.menuPrincipaleActivity" />
+        </activity>
+        <activity android:name=".menuPrincipaleActivity" android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".ModuloActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize|layoutDirection|uiMode">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".menuPrincipaleActivity" />
+        </activity>
+        <activity
+            android:name=".Modulo2Activity"
+            android:configChanges="keyboardHidden|orientation|screenSize|layoutDirection|uiMode">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".menuPrincipaleActivity" />
+        </activity>
+        <activity
+            android:name=".ModificaActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize|layoutDirection|uiMode">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".menuPrincipaleActivity" />
+        </activity>
+        <activity
+            android:name=".AutorizzazioneActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize|layoutDirection|uiMode"
+            android:theme="@style/AppTheme" />
+
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="${applicationId}.provider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/provider_paths" />
+        </provider>
+    </application>
+
+</manifest>

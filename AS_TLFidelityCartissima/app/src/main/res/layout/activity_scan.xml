@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".ScanActivity">
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+
+        <ImageButton
+            android:id="@+id/cancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:onClick="vaiIndietro"
+            android:contentDescription="telecamera"
+            app:srcCompat="@drawable/ic_arrow_back" />
+
+        <!--ImageButton
+            android:layout_gravity="center"
+            android:id="@+id/flash"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="controllaFlash"
+            app:srcCompat="@drawable/ic_flash_off_black_24dp" /-->
+
+        <!--ImageButton
+            android:layout_gravity="center"
+            android:id="@+id/camera"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="cambiaCamera"
+            android:contentDescription="cambia camera"
+            app:srcCompat="@drawable/ic_camera_front_black_24dp" /-->
+
+        <TextView
+            android:id="@+id/currResult"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_weight="1"
+            android:text="0000000000000"
+            android:textAlignment="center"
+            android:textSize="30sp" />
+
+        <ImageButton
+            android:id="@+id/ok"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:scaleType="fitXY"
+            android:onClick="tornaCodice"
+            android:contentDescription="OK"
+            app:tint="@android:color/darker_gray"
+            app:srcCompat="@drawable/ic_arrow_forward" />
+    </LinearLayout>
+
+    <com.retexspa.tecnologica.tlmoduloloyalty.GoogleVisionScanView
+        android:id="@+id/scanView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+
+
+</LinearLayout>

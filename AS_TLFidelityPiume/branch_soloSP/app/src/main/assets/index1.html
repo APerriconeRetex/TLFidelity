@@ -1,0 +1,975 @@
+<!DOCTYPE html>
+<html lang="it-IT">
+    <head>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+
+        <meta http-equiv="content-language" content="it">
+        <style type="text/css">
+            :root {
+                --debug-color: transparent;
+            }
+        @font-face {
+            font-family: Crai;
+            src: url("ASIFAWMyriadPro-Semibold.woff2");
+        }
+        body {
+           overflow-y: scroll;
+            overflow-x: hidden;
+            margin: 0;
+            background-color: white;
+        }
+        div {
+            width: 100vw;
+            display: block;
+            position: relative;
+        }
+        #parte_a {
+            background: url("file:///android_res/drawable/sfondo_piume_gimp.png");
+            height:  128.7vw;
+            background-repeat: no-repeat;
+            background-size: 100%;
+            overflow: visible;
+        }
+
+        div input {
+            position: absolute;
+            background-color: transparent;
+            border: 1px solid var(--debug-color);
+            font-size: 1.9vw;
+            height: 2.4vw;
+            width: 73.4vw;
+            padding-left: 1.6vw;
+            padding-right: 1.6vw;
+            left: 11.4vw;
+        }
+        #messaggio { /*codice negozio*/
+            border: 1px solid var(--debug-color);
+            font-size: 1.9vw;
+            top: 19.7vw;
+            left: 32.8vw;
+            width: 6.8vw;
+            height: 2.5vw;
+        }
+        .centra {
+            text-align: center;
+        }
+        #ok {
+            width: 25vw;
+            height: 4vw;
+            font-size: 2.5vw;
+            font-family: Crai;
+        }
+        #ok:disabled {
+            color: #BBB;
+        }
+
+        .barBtn {
+            position: absolute;
+            border-radius: 50%;
+            background-color: transparent;
+            box-shadow: none;
+            transition: background-color 0.1s, box-shadow 0.1s;
+            width: 5.5vw;
+            height: 5.5vw;
+        }
+        .barBtn:active {
+            background-color: rgba(255,255,255,0.5);
+            box-shadow: 0 0 10px white;
+        }
+        #back {
+            top:0.5vw;
+            left: 3.5vw;
+        }
+        #camera {
+            top:14.3vw;
+            right: 2vw;
+        }
+        #camera:active {
+            background-color: rgba(128,128,128,0.5);
+            box-shadow: 0 0 10px gray;
+        }
+        #codiceTessera {
+            top: 19.7vw;
+            left: 50.6vw;
+            width: 24.9vw;
+        }
+         #footer {
+            background: url("file:///android_res/drawable/sfondo_toolbar.png");
+            height:  5.9vw;
+            background-repeat: no-repeat;
+            background-size: 100%;
+            top: 5.0vw;
+        }
+
+         #cognome {
+            top: 30vw;
+            width: 77vw;
+            left: 16.0vw;
+        }
+        #nome {
+            top: 33vw;
+            width: 77vw;
+            left: 16.0vw;
+        }
+        #codFiscale {
+            top: 37.5vw;
+            width: 37.5vw;
+            left: 16.0vw;
+        }
+        #nascita {
+            top: 37.5vw;
+            width: 14.5vw;
+            left: 66.6vw;
+        }
+        #sessoM, #sessoM+label {
+            left: 91.6vw;
+            top: 37.5vw;
+            width: 1.7vw;
+        }
+        #sessoF, #sessoF+label {
+            left: 94.6vw;
+            top: 37.4vw;
+            width: 1.7vw;
+        }
+        #sessoObl {
+            right: 0.6vw;
+            top: 37vw;
+        }
+
+        #cittaNascita {
+            top: 40.6vw;
+            left: 16.0vw;
+            width: 65.3vw;
+        }
+
+        #provNascita {
+            top: 40.6vw;
+            left: 91.5vw;
+            width: 5vw;
+            padding-left: 0.2vw;
+
+        }
+        input[name="sesso"]+label {
+            width: 12vw;
+            height: 3vw;
+            font-size: 2vw;
+            background-color: transparent;
+            border: 1px solid var(--debug-color);
+            cursor: pointer;
+            overflow: visible;
+            display: block;
+            position: absolute;
+        }
+        input[name="sesso"] {
+            opacity: 0;
+            left: -100;
+            width: 0vw;
+            height: 0vw;
+        }
+        input[name="sesso"]:checked+label::after {
+            content:"\2B24";
+            font-size: 1.3vw;
+            line-height: 0vw;
+            position: absolute;
+            top: 1.4vw;
+            right: 0.6vw;
+        }
+        .warning {
+            position: absolute;
+            width: 3.0vw;
+            height: 3.0vw;
+        }
+        #citta {
+            top: 47vw;
+            left: 16.0vw;
+            width: 77vw;
+        }
+        #indirizzo {
+            top: 50vw;
+            left: 16.0vw;
+            width: 65vw;
+
+        }
+        #civico {
+            top: 50.0vw;
+            left: 88.5vw;
+            width: 4.5vw;
+        }
+        #cap {
+            top: 53.2vw;
+            left: 16.0vw;
+            width: 9vw;
+        }
+        #prov {
+            top: 53.2vw;
+            left: 36.5vw;
+            width: 5.8vw;
+            padding-left: 0.2vw;
+        }
+
+        #stato {
+            top: 53.2vw;
+            left: 88.5vw;
+            width: 4.4vw;
+        }
+        #cellulare {
+            top: 60.5vw;
+            left: 16.0vw;
+            width: 32.5vw;
+        }
+        #telfisso {
+            top: 60.5vw;
+            left: 61vw;
+            width: 32.5vw;
+        }
+        #email {
+            top: 63.8vw;
+            left: 16.0vw;
+            width: 77vw;
+        }
+        #emailError {
+            position: absolute;
+            border-radius: 0.3vw;
+            top:66.2vw;
+            left:13.4vw;
+            width: 82.1vw;
+            padding: 0.5vw;
+            background: red;
+            border: 1px solid black;
+            font-family: Crai, Helvetica, Arial, sans-serif;
+            z-index: 1000;
+        }
+
+
+        .barBtn {
+            position: absolute;
+            border-radius: 50%;
+            background-color: transparent;
+            box-shadow: none;
+            transition: background-color 0.1s, box-shadow 0.1s;
+            width: 5.5vw;
+            height: 5.5vw;
+        }
+        .barBtn:active {
+            background-color: rgba(255,255,255,0.5);
+            box-shadow: 0 0 10px white;
+        }
+        #back {
+            top:0.5vw;
+            left: 3.5vw;
+        }
+        .centra {
+            text-align: center;
+        }
+        #ok {
+            width: 25vw;
+            height: 4vw;
+            font-size: 2.5vw;
+            font-family: Crai;
+            color:#aD0959;
+            background-color: #E9E9E9;
+        }
+        #ok:disabled {
+            color: #BBB;
+        }
+        .error {
+            background: url("ic_warning.svg");
+            background-repeat: no-repeat;
+            background-position: right;
+        }
+
+        .ui-tooltip {
+            padding: 0.5vw;
+            color: white;
+            background-color: black;
+            border-radius: 0.3vw;
+            font-family: Crai, Helvetica, Arial, sans-serif;
+            width: 40vw;
+            max-width: 40vw;
+            box-shadow: none;
+            border: none;
+        }
+
+        input[name="professione"]+label {
+
+            width: 12vw;
+            height: 2.9vw;
+            font-size: 2vw;
+            background-color: transparent;
+            border: 1px solid var(--debug-color);
+            cursor: pointer;
+            overflow: visible;
+            display: block;
+            position: absolute;
+        }
+
+        input[name="professione"] {
+            opacity: 0;
+            left: -100;
+            width: 0vw;
+            height: 0vw;
+        }
+        input[name="professione"], input[name="professione"]+label {
+            width: 2.5vw;
+            top: 73.1vw;
+        }
+        input[name="professione"]:checked+label::after {
+
+            content:"\2713";
+            font-size: 2.6vw;
+            line-height: 0vw;
+            position: absolute;
+            top: 1.6vw;
+            right: 0.3vw;
+        }
+        #professioneAG, #professioneAG+label {
+            left: 19.5vw;
+        }
+        #professioneAR, #professioneAR+label {
+            left: 26.4vw;
+        }
+        #professioneAU, #professioneAU+label {
+            left: 33.4vw;
+        }
+        #professioneCA, #professioneCA+label {
+            left: 40.4vw;
+        }
+        #professioneCO, #professioneCO+label {
+            left: 47.3vw;
+        }
+        #professioneIM, #professioneIM+label {
+            left: 54.2vw;
+        }
+        #professioneIP, #professioneIP+label {
+            left: 61.2vw;
+        }
+        #professioneIN, #professioneIN+label {
+            left: 68.0vw;
+        }
+        #professioneOP, #professioneOP+label {
+            left: 75.0vw;
+            width: 2.5vw;
+        }
+        #professionePR, #professionePR+label {
+            left: 81.8vw;
+        }
+        #professioneAT, #professioneAT+label {
+            left: 88.8vw;
+        }
+        input[name="studio"]+label {
+            width: 12vw;
+            height: 3vw;
+            font-size: 2vw;
+            background-color: transparent;
+            border: 1px solid var(--debug-color);
+            cursor: pointer;
+            overflow: visible;
+            display: block;
+            position: absolute;
+            top: 79.7vw;
+            width: 2.5vw;
+        }
+        input[name="studio"] {
+            opacity: 0;
+            left: -100;
+            width: 0vw;
+            height: 0vw;
+            top: 79.7vw;
+            width: 2.5vw;
+        }
+        input[name="studio"]:checked+label::after {
+            content:"\2713";
+            font-size: 2.6vw;
+            line-height: 0vw;
+            position: absolute;
+            top: 1.6vw;
+            right: 0.3vw;
+        }
+        #studioE, #studioE+label {
+            left: 19.55vw;
+        }
+        #studioS, #studioS+label {
+            left: 26.45vw;
+        }
+        #studioL, #studioL+label {
+            left: 33.4vw;
+        }
+
+        input[name="animaliC"]+label {
+            width: 12vw;
+            height: 3vw;
+            width: 2.5vw;
+            font-size: 2vw;
+            background-color: transparent;
+            border: 1px solid var(--debug-color);
+            cursor: pointer;
+            overflow: visible;
+            display: block;
+            position: absolute;
+        }
+
+        input[name="animaliC"] {
+            opacity: 0;
+            left: -100;
+            width: 0vw;
+            height: 0vw;
+        }
+        input[name="animaliC"]:checked+label::after {
+
+            content:"\2713";
+            font-size: 2.6vw;
+            line-height: 0vw;
+            position: absolute;
+            top: 1.6vw;
+            right: 0.3vw;
+        }
+        input[name="animaliG"]+label {
+
+            width: 12vw;
+            height: 3vw;
+            width: 2.5vw;
+
+            font-size: 2vw;
+            background-color: transparent;
+            border: 1px solid var(--debug-color);
+            cursor: pointer;
+            overflow: visible;
+            display: block;
+            position: absolute;
+        }
+
+        input[name="animaliG"] {
+            opacity: 0;
+            left: -100;
+            width: 0vw;
+            height: 0vw;
+        }
+        input[name="animaliG"]:checked+label::after {
+
+            content:"\2713";
+            font-size: 2.6vw;
+            line-height: 0vw;
+            position: absolute;
+            top: 1.6vw;
+            right: 0.3vw;
+        }
+        #animaliC, #animaliC+label {
+            left: 82.0vw;
+            top: 79.7vw;
+        }
+        #animaliG, #animaliG+label {
+            left: 89.0vw;
+            top: 79.7vw;
+        }
+
+
+        #informativa {
+            position: absolute;
+            top: 89.5vw;
+            left: 9.85vw;
+            width: 6.9vw;
+            height: 2.0vw;
+            cursor: pointer; /*inutile su android*/
+             border: 1px solid var(--debug-color);;
+        }
+
+        #informativa2 {
+
+         position: absolute;
+         top: 96vw;
+         left: 6.85vw;
+         width: 10.8vw;
+         height: 2.0vw;
+         cursor: pointer; /*inutile su android*/
+          border: 1px solid var(--debug-color);;
+     }
+
+     input.auth+label {
+            width: 2.6vw;
+            height: 2.6vw;
+            font-size: 2vw;
+            background-color: transparent;
+            border: 1px solid var(--debug-color);
+            cursor: pointer;
+            overflow: visible;
+            display: block;
+            position: absolute;
+        }
+
+        input.auth {
+            /*display: none;*/
+            opacity: 0;
+            left: -100;
+            width: 0vw;
+            height: 0vw;
+        }
+        input.auth:checked+label::after {
+            content:"\2713";
+            font-size: 2.6vw;
+            line-height: 0vw;
+            position: absolute;
+            top: 1.2vw;
+            right: 0.3vw;
+        }
+        .authS, .authS+label {
+            left: 87.0vw;
+        }
+        .authN, .authN+label {
+            left: 90.2vw;
+        }
+        .auth1, .auth1+label {
+            top: 102vw;
+        }
+        .auth2, .auth2+label {
+            top: 107.6vw;
+        }
+        .auth3, .auth3+label {
+            top: 113.8vw;
+        }
+        .authObl {
+            left: 93.5vw;
+        }
+
+        #dataFirma1 {
+            left: 28vw;
+            top: 120.0vw;
+            width: 18.5vw;
+        }
+
+        #firma1 {
+            position: absolute;
+            width: 36.6vw;
+            height: 10vw;
+            position: absolute;
+            top: 118.6vw;
+            left: 57.5vw;
+            border: 1px dotted black;
+        }
+
+
+        #privacy {
+            position: absolute;
+            top: 8.5vw;
+            right: 12vw;
+            width: 14.5vw;
+            height: 3vw;
+            cursor: pointer; /*inutile su android*/
+        }
+        .error {
+            background: url("ic_warning.svg");
+            background-repeat: no-repeat;
+            background-position: right;
+        }
+
+    </style>
+
+    <script>
+             function check(cosa, come) {
+                var campo = $(cosa);
+                var ok = campo.val().length>1;
+                if(come) try {
+                    ok = come? come(campo.val()) : campo.val().length>1;
+                } catch(ex) { }
+                campo.toggleClass("error", !ok)
+                return ok;
+            }
+        function controllaNascita(txt) {
+            txt = txt.replace(/\D/g,"/");
+            var primaB = txt.indexOf("/");
+            if(primaB<0) return false;
+            var secondaB = txt.indexOf("/",primaB+1);
+            if(secondaB<0) return false;
+            var giorno = parseInt(txt.substr(0,primaB))
+            var mese = parseInt(txt.substring(primaB+1,secondaB))
+            var anno =txt.substr(secondaB+1);
+            var oggi = new Date();
+            return giorno>0 && giorno<=31 && mese>0 && mese<=12 && anno.length==4 && anno>1900 && anno<=oggi.getFullYear().toString().padStart(4,"0");
+        }
+        function checkRadio(nome) {
+            var ok = $("input[name='"+nome+"']:checked").length>0;
+            $("#"+nome+"Obl").toggle(!ok);
+            return ok;
+        }
+
+            function controllaDatiObbligatori() {
+                var ok=true;
+                ok &= check("#codiceTessera", (v)=> tecno.checkTessera(v) );
+                 ok &= check("#cognome");
+                ok &= check("#nome");
+                ok &= check("#cellulare");
+                ok &= check("#nascita", controllaNascita );
+                ok &= check("#cittaNascita", (v)=> tecno.checkCitta(v, $("#provNascita").val()));
+                ok &= check("#provNascita", (v)=> tecno.checkProv(v,  $("#cittaNascita").val()));
+                ok &= check("#codFiscale");
+                ok &= check("#indirizzo");
+                //ok &= check("#civico");
+                ok &= check("#citta", (v)=> tecno.checkCitta(v, $("#prov").val()));
+                ok &= check("#cap", (v)=> tecno.checkCap(v, $("#citta").val(), $("#prov").val()));
+                ok &= check("#prov", (v)=> tecno.checkProv(v, $("#citta").val()));
+                ok &= checkRadio("sesso");
+                ok &= checkRadio("auth1");
+                ok &= checkRadio("auth2");
+                ok &= checkRadio("auth3");
+                try {
+                    ok &= tecno.haFirme();
+                } catch(ex) {}
+                $("#ok").prop('disabled', !ok);
+
+            }
+            function SetTessera(value) {
+                $("#codiceTessera").val(value);
+                controllaDatiObbligatori();
+            }
+
+            $(function () {
+            $( document ).tooltip();
+                // $("#codFiscale").tooltip().tooltip("open"); // per test
+                $("input").change(() => {
+                    // change serve per i radio e i check
+                    controllaDatiObbligatori();
+                    try { tecno.DataWritten(); } catch(ex) {}
+                }).on('input',(e) => {
+                    // input serve per le caselle di testo
+                    controllaDatiObbligatori();
+                    try { tecno.DataWritten(); } catch(ex) {}
+                }).focus(function () {
+                     var center = $(window).height() / 2;
+                     var top = $(this).offset().top;
+                     var dy = window.scrollY;
+                     console.log(this.id+" top:"+ top+" center:"+center+" dy:"+dy+ " -> "+(center+dy));
+                     if (top > (center+dy)) {
+                         $('html, body').animate({ scrollTop: top - center }, 'fast');
+                     } /*else if (top<dy) {
+                        $('html, body').animate({ scrollTop: top }, 'fast');
+                     }*/
+                 });
+                // metto i punti esclamativi
+                controllaDatiObbligatori();
+                //date della firma e controllo maggiore età
+                var oggi = new Date();
+                var day = oggi.getDate().toString().padStart(2,"0");
+                var month = (oggi.getMonth() + 1).toString().padStart(2,"0");
+                var year = oggi.getFullYear().toString().padStart(4,"0");
+                var maggiorenni = (oggi.getFullYear()-18);
+                oggi = year + "-" + month + "-" + day;
+                $("#dataFirma1").val(oggi);
+
+                // input nascita
+                $('#nascita').on('keydown',(e)=>{
+                    e.target.lastBack=e.keyCode == 8 || e.keyCode == 46;
+                }).on('input',(e) => {
+                    var txt = e.target.value.replace(/\D/g,"/").replace(/\/\//g,"/");
+                    if(txt!=e.target.value)  e.target.value = txt;
+                    var primaB = txt.indexOf("/");
+                    if(primaB<0) {
+                        // sta inserendo il giorno
+                        var giorno = parseInt(txt);
+                        if(giorno>31) { // non è possibile, passo al mese
+                            txt=((giorno/10)|0).toString(); //|0 per convertire in int
+                            if(txt.length==1) txt="0"+txt;
+                            txt+="/"+(giorno%10).toString();
+                        } else if(giorno>3 && giorno<10)  {
+                            // dal 4 in poi considero il giorno immesso e vado avanti
+                            txt="0"+txt.replace("0","");
+                        } else if(txt.length>2) {
+                            //non dovrebbe succedere...
+                            txt=txt.substr(0,2)+"/"+txt.substr(2);
+                        }
+                        // se il giorno è lungo 2 metto la barra per passare al mese
+                        if(txt.length==2  && !e.target.lastBack) txt+="/"
+                        e.target.value = txt;
+                        return;
+                    }
+                    if(primaB==txt.length-1) {
+                        //la barra è l'ultima lettera, se 'sta cancellando la elimino
+                        if(e.target.lastBack)
+                            e.target.value = txt.substr(0,primaB);
+                        return;
+                    }
+                    var secondaB = txt.indexOf("/",primaB+1);
+                    if(secondaB<0) {
+                         // sta inserendo il mese
+                        var primaParte = txt.substr(0,primaB+1); //parte col giorno, costante
+                        txt=txt.substr(primaB+1);
+                        var mese = parseInt(txt);
+                        if(mese>12) { // non è possibile, passo all'anno
+                            txt=((mese/10)|0).toString(); //|0 per convertire in int
+                            if(txt.length==1) txt="0"+txt;
+                            txt+="/"+(mese%10).toString();
+                        } else if(mese>1 && mese<10) {
+                            // dal mese 2 in poi lo considero immeso
+                            txt="0"+txt.replace("0","");
+                        } else if(txt.length>2) {
+                            //non dovrebbe succedere...
+                            txt=txt.substr(0,2)+"/"+txt.substr(2);
+                        }
+                        // se il mese è lungo 2 metto la barra per passare all'anno
+                        if(txt.length==2  && !e.target.lastBack) txt+="/"
+                        e.target.value = primaParte+txt;
+                        return;
+                    }
+                    if(secondaB==txt.length-1) {
+                        //la barra è l'ultima lettera, se 'sta cancellando la elimino
+                        if(e.target.lastBack)
+                            e.target.value = txt.substr(0,secondaB);
+                        return;
+                    }
+                    // codice per l'anno non necessario...
+                    // magari un controllo per evitare valori assurdi tipo lungo 5 o
+                    // sopra l'anno degli appena maggiorenni
+                    //var primaParte = txt.substr(0,secondaB+1);
+                    //var anno = txt.substr(secondaB+1);
+                    //if(!anno.startsWith("19") && !anno.startsWith("20")) {
+                    //
+                    //}
+                }).on("focusout",(e)=>{
+                    var txt = e.target.value.replace(/\D/g,"/");
+                    var primaB = txt.indexOf("/");
+                    if(primaB<0) return;
+                    var secondaB = txt.indexOf("/",primaB+1);
+                    if(secondaB<0) return;
+                    var giorno = parseInt(txt.substr(0,primaB)).toString();
+                    var mese = parseInt(txt.substring(primaB+1,secondaB));
+                    var anno = parseInt(txt.substr(secondaB+1));
+                    if(isNaN(giorno) || isNaN(mese) || isNaN(anno)) return;
+                    mese = mese.toString();
+                    if(giorno.length==1) giorno="0"+giorno;
+                    if(mese.length==1) mese="0"+mese;
+                    if(anno<100) {
+                        // solo 2 cifre per l'anno, gli aggiungo le altre 2 per coerenza
+                        if(anno+2000<=maggiorenni) anno+=2000; else anno+=1900;
+                    }
+                    e.target.value = giorno+"/"+mese+"/"+anno;
+                });
+                // auto-completamenti geografici
+                $( ".citta" ).autocomplete({
+                    source:  function (request, response) {
+                        $.getJSON("tl:/citta", { id: this.element[0].id, term: request.term }, response)
+                    },
+                    select: (e,ui) => {
+                        $.getJSON("tl:/infoCitta", { citta: ui.item.label }, (data)=>{
+                            if(e.target.id=="citta" && data.cap.length==1)
+                                $("#cap").val(data.cap[0]);
+                            if(data.prov.length==1) {
+                                if(e.target.id=="cittaNascita")
+                                    $("#provNascita").val(data.prov[0]);
+                                else
+                                    $("#prov").val(data.prov);
+                            }
+                            controllaDatiObbligatori();
+                            $("#codFiscale").focus();
+                        })
+                    }
+                });
+               $("#provNascita").autocomplete({
+                    minLength: 0,
+                    source: (request, response)=> {
+                        $.getJSON("tl:/provincie", { citta: $('#cittaNascita').val(), term: request.term }, response)
+                    },
+                    select: (e,ui) => {
+                        e.target.value=ui.item.label;
+                        controllaDatiObbligatori();
+                    }
+                }).focus(function() { $(this).autocomplete("search") } );
+                $("#prov").autocomplete({
+                    minLength: 0,
+                    source: (request, response)=> {
+                        $.getJSON("tl:/provincie", { citta: $('#citta').val(), term: request.term }, response)
+                    },
+                    select: (e,ui) => {
+                        e.target.value=ui.item.label;
+                        controllaDatiObbligatori();
+                    }
+                }).focus(function() { $(this).autocomplete("search") } );
+                $("#cap").autocomplete({
+                    minLength: 0,
+                    source: (request, response)=> {
+                        $.getJSON("tl:/cap", { citta: $('#citta').val(), term: request.term }, response)
+                    },
+                    select: (e,ui) => {
+                        e.target.value=ui.item.label;
+                        controllaDatiObbligatori();
+                    }
+                }).focus(function() { $(this).autocomplete("search") } );
+                // parti cliccabili
+                $("#firma1").on("click", firmaClick);
+                $("#ok").on("click", () => tecno.vaiAvanti( $("#codiceTessera").val(),JSON.stringify($("form").serializeArray())) );
+                // $("#ok").on("click", () => tecno.salvaCliente(JSON.stringify($("form").serializeArray())));
+                $("#back").on("click", () => tecno.vaiIndietro());
+                $("#camera").on("click", () => tecno.vaiCamera() );
+                // preriempimento firma
+                $("[codFiscale]").change(controllaCF).on('input',controllaCF);
+                 // mostra informativa
+                $("#informativa").on("click", () => tecno.mostraInformativa());
+                $("#informativa2").on("click", () => tecno.mostraInformativa());
+                $("#email").focusout(function() { checkEmail();})
+                            .focus(function() {emailErrorUp();});
+
+                $("#codiceTessera").on('input',(e) => {
+                    // input serve per le caselle di testo
+                    controllaDatiObbligatori();
+                    tecno.DataWritten();
+                })
+
+                $("input[type='radio']").on("click", ()=> {
+                   // SetTessera(tecno.getBaseTessera($("#cartaSenior")[0].checked,$("#tessera").val()));
+                });
+                $("input").focus(function () {
+                     var center = $(window).height() / 2;
+                     var top = $(this).offset().top;
+                     var dy = window.scrollY;
+                     console.log(this.id+" top:"+ top+" center:"+center+" dy:"+dy+ " -> "+(center+dy));
+                     if (top > (center+dy)) {
+                         $('html, body').animate({ scrollTop: top - center }, 'fast');
+                     }
+                 });
+                 $.ajax({
+                    "url": "tl:/infoPV"
+                }).done(SetPV).fail(()=>{
+                    SetPV({"codPV": "9990","descrizione": "Punto Vendita di Debug", "cedi": "TecnoLogica Sviluppo", "tipiTessere": [1,11,13] });
+                });
+
+ });
+                function SetPV(data) {
+                        var ele = $("#messaggio");
+                        var str = ele.html();
+                        str=str.replace(/{NOME NEGOZIO}/g,data.codPV);
+
+                        ele.html(str);
+
+                    }
+
+
+
+
+                function SetCliente(data) {
+                console.log(data);
+                for (const campo in data) {
+                    if (data.hasOwnProperty(campo)) {
+                        const info = data[campo];
+                        var ele = $("[name="+campo+"]");
+                        if(ele.length==1)
+                            ele.val(info)
+                        if(ele.length>1 && info.length>0) {
+                            var subEle = ele.filter("[value="+info+"]");
+                            if(subEle.length>0)
+                                subEle[0].checked = true;
+                            else
+                                console.warn("valore "+info+" dentro l'elemento "+campo+" non trovato");
+                        }
+                        if(ele.length==0) {
+                            console.warn("elemento "+campo+" non trovato");
+                        }
+                    }
+                }
+                controllaDatiObbligatori();
+            }
+
+            function controllaCF() {
+                $("#codFiscale").val(tecno.getCodiceFiscale(
+                        $("#cognome").val(),
+                        $("#nome").val(),
+                        $("#nascita").val(),
+                        !$("#sessoF")[0].checked,
+                        $("#cittaNascita").val(),
+                        $("#provNascita").val()));
+            }
+
+            function checkEmail() {
+                var currentEmail = $("#email").val();
+                if (currentEmail.length!=0 && !(/^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/.test( currentEmail))) {
+                    $("#emailError").slideDown();
+                } else {
+                    $("#emailError").slideUp();
+                }
+
+            }
+
+            function emailErrorUp() {
+                $("#emailError").slideUp();
+            }
+
+               function firmaClick(e) {
+                var rect = e.target.getBoundingClientRect();
+                var id= parseInt(e.target.id.substr(5));
+                tecno.faiFirma(id,rect.x,rect.y,rect.width,rect.height);
+
+            }
+
+            function richiedCliente() {
+                $.getJSON("tl:/cliente",SetCliente);
+            }
+
+    </script>
+    </head>
+    <body>
+    <form>
+        <div id="parte_a">
+            <img id="back" src="ic_arrow_back.svg"  class="barBtn">
+            <img id="camera" src="ic_photo_camera.svg"  class="barBtn">
+            <div id="messaggio">
+                {NOME NEGOZIO}
+            </div>
+            <input name="codiceTessera" id="codiceTessera" type="tel"  placeholder="0400000000000" class="error">
+            <input name="cognome" id="cognome" type="text" placeholder="Rossi" codFiscale="si">
+            <input name="nome" id="nome" type="text"  placeholder="Andrea"  codFiscale="si">
+            <input name="codFiscale" id="codFiscale" type="text" placeholder="RSSNDR74C10F205W"
+                   title="Verificare il codice fiscale calcolato.">
+            <input name="dataNascita" id="nascita" type="tel" placeholder="10/03/1974"  codFiscale="si">
+            <input name="sesso" value="M" id="sessoM" type="radio" codFiscale="si"><label for="sessoM"></label>
+            <input name="sesso" value="F" id="sessoF" type="radio" codFiscale="si"><label for="sessoF"></label>
+            <img id="sessoObl" class="warning" src="ic_warning.svg">
+            <input name="cittaNascita" id="cittaNascita" type="text" class="citta" placeholder="Milano"  codFiscale="si">
+            <input name="provNascita" id="provNascita" type="text" placeholder="MI">
+            <input name="citta" id="citta" type="text" class="citta" placeholder="Milano">
+            <input name="indirizzo" id="indirizzo" type="text" placeholder="Via Rossi">
+            <input name="civico" id="civico" type="text" placeholder="10">
+            <input name="cap" id="cap" type="number" placeholder="20100">
+            <input name="prov" id="prov" type="text" placeholder="MI">
+            <input name="stato" id="stato" type="text" placeholder="IT">
+            <input name="cellulare" id="cellulare" type="tel" placeholder="0039335010203">
+            <input name="telfisso" id="telfisso" type="tel" placeholder="0105567890">
+            <input name="email" id="email" type="email" placeholder="rossi.andrea@gmail.com" >
+            <div id="emailError" style="display:none;">Indirizzo email errato</div>
+            <input name="professione" value="14" id="professioneAG" type="radio" ><label for="professioneAG"></label>
+            <input name="professione" value="15" id="professioneAR" type="radio" ><label for="professioneAR"></label>
+            <input name="professione" value="9" id="professioneAU" type="radio" ><label for="professioneAU"></label>
+            <input name="professione" value="2" id="professioneCA" type="radio" ><label for="professioneCA"></label>
+            <input name="professione" value="8" id="professioneCO" type="radio" ><label for="professioneCO"></label>
+            <input name="professione" value="3" id="professioneIM" type="radio" ><label for="professioneIM"></label>
+            <input name="professione" value="6" id="professioneIP" type="radio" ><label for="professioneIP"></label>
+            <input name="professione" value="11" id="professioneIN" type="radio" ><label for="professioneIN"></label>
+            <input name="professione" value="4" id="professioneOP" type="radio" ><label for="professioneOP"></label>
+            <input name="professione" value="10" id="professionePR" type="radio" ><label for="professionePR"></label>
+            <input name="professione" value="13" id="professioneAT" type="radio" ><label for="professioneAT"></label>
+            <input name="studio" value="2" id="studioE" type="radio" ><label for="studioE"></label>
+            <input name="studio" value="3" id="studioS" type="radio" ><label for="studioS"></label>
+            <input name="studio" value="4" id="studioL" type="radio" ><label for="studioL"></label>
+            <input name="animaliC" value="true" id="animaliC" type="checkbox" ><label for="animaliC"></label>
+            <input name="animaliG" value="true" id="animaliG" type="checkbox" ><label for="animaliG"></label>
+            <div id="informativa"></div>
+            <div id="informativa2"></div>
+            <input class="auth authS auth1" value="S" id="auth1S" type="radio" name="auth1"> <label for="auth1S"></label>
+            <input class="auth authN auth1" value="N" id="auth1N" type="radio" name="auth1"> <label for="auth1N"></label>
+            <img id="auth1Obl" class="warning authObl auth1" src="ic_warning.svg">
+            <input name="auth2" value="S" class="auth authS auth2" id="auth2S" type="radio"> <label for="auth2S"></label>
+            <input name="auth2" value="N" class="auth authN auth2" id="auth2N" type="radio"> <label for="auth2N"></label>
+            <img id="auth2Obl" class="warning authObl auth2" src="ic_warning.svg">
+            <input name="auth3" value="S" class="auth authS auth3" id="auth3S" type="radio"> <label for="auth3S"></label>
+            <input name="auth3" value="N" class="auth authN auth3" id="auth3N" type="radio"> <label for="auth3N"></label>
+            <img id="auth3Obl" class="warning authObl auth3" src="ic_warning.svg">
+            <input name="dataFirma" id="dataFirma1" type="date" lang="it" data-date-format="DD/MM/YY">
+            <img src="tl:/firma1.png"  id="firma1">
+        </div>
+
+
+        <p class="centra">
+            <input type="button" value="Procedi" id="ok" >
+        </p>
+
+        </form>
+    <div id="footer"></div>
+    </body>
+</html>

@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="it-IT">
+    <head>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+
+        <meta http-equiv="content-language" content="it">
+        <style type="text/css">
+        @font-face {
+            font-family: Crai;
+            src: url("Crai-Regular.woff2");
+        }
+        body {
+            overflow-y: scroll;
+            overflow-x: hidden;
+            margin: 0;
+        }
+        div {
+            width: 100vw;
+            display: block;
+            position: relative;
+        }
+        #parte_a {
+            background: url("file:///android_res/drawable/sfondo1a.png");
+            height:  39.7vw;
+            background-repeat: no-repeat;
+            background-size: 100%;
+        }
+        #parte_b_solo {
+            background: url("file:///android_res/drawable/sfondo1b_solo.png");
+            height:  16.2vw;
+            background-repeat: no-repeat;
+            background-size: 100%;
+        }
+        #parte_b_senior {
+            background: url("file:///android_res/drawable/sfondo1b_senior.png");
+            height:  16.2vw;
+            background-repeat: no-repeat;
+            background-size: 100%;
+        }
+        #parte_c {
+            background: url("file:///android_res/drawable/sfondo1c.png");
+            height:  12.3vw;
+            background-repeat: no-repeat;
+            background-size: 100%;
+        }
+        #parte_d {
+            background: url("file:///android_res/drawable/sfondo1d.png");
+            height:  5.9vw;
+            background-repeat: no-repeat;
+            background-size: 100%;
+        }
+        div input {
+            position: absolute;
+            background-color: transparent;
+            border: 1px solid transparent;
+            font-size: 1.4vw;
+            height: 2.8vw;
+            width: 73.4vw;
+            padding-left: 1.6vw;
+            padding-right: 1.6vw;
+            padding-top: 1.0vw;
+            left: 11.4vw;
+        }
+        #messaggio {
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 1.9vw;
+            position: absolute;
+            top: 20.4vw;
+            left: 11.5vw;
+            width: 76.5vw;
+        }
+        .centra {
+            text-align: center;
+        }
+        #ok {
+            width: 25vw;
+            height: 4vw;
+            font-size: 2.5vw;
+            font-family: Crai;
+        }
+        #ok:disabled {
+            color: #BBB;
+        }
+
+        .barBtn {
+            position: absolute;
+            border-radius: 50%;
+            background-color: transparent;
+            box-shadow: none;
+            transition: background-color 0.1s, box-shadow 0.1s;
+            width: 5.5vw;
+            height: 5.5vw;
+        }
+        .barBtn:active {
+            background-color: rgba(255,255,255,0.5);
+            box-shadow: 0 0 10px white;
+        }
+        #back {
+            top:0.5vw;
+            left: 3.5vw;
+        }
+        #camera {
+            bottom:4vw;
+            right: 6vw;
+        }
+        #camera:active {
+            background-color: rgba(128,128,128,0.5);
+            box-shadow: 0 0 10px gray;
+        }
+        #tessera {
+            top: 3.5vw;
+        }
+        input[type="radio"]+label {
+            width: 21vw;
+            height: 9vw;
+            font-size: 2vw;
+            background-color: transparent;
+            border: 1px solid transparent;
+            cursor: pointer;
+            overflow: visible;
+            display: block;
+            position: absolute;
+            top: 6vw;
+        }
+
+        input[type="radio"] {
+            /*display: none;*/
+            opacity: 0;
+            left: -100;
+            width: 0vw;
+            height: 0vw;
+        }
+        input[type="radio"]:checked+label::after {
+            content:"\2713";
+            font-size: 4vw;
+            line-height: 0vw;
+            position: absolute;
+            top: 4.4vw;
+            left: 1.2vw;
+        }
+        #cartaPiu1,#cartaPiu1+label {
+            left: 45vw;
+        }
+        #cartaPiu2,#cartaPiu2+label {
+            left: 28.8vw;
+        }
+        #cartaSenior,#cartaSenior+label {
+            left: 49.5vw;
+            width: 32vw;
+        }
+        #privacy {
+            position: absolute;
+            top: 8.5vw;
+            right: 12vw;
+            width: 14.5vw;
+            height: 3vw;
+            cursor: pointer; /*inutile su android*/
+        }
+        .error {
+            background: url("ic_warning.svg");
+            background-repeat: no-repeat;
+            background-position: right;
+        }
+    </style>
+
+    <script>
+            function check(cosa, come) {
+                var campo = $(cosa);
+                var ok = come? come(campo.val()) : campo.val().length>1;
+                campo.toggleClass("error", !ok)
+                return ok;
+            }
+            function controllaDatiObbligatori() {
+                var ok=true;
+                ok &= check("#tessera", (v)=> tecno.checkTessera(v) );
+                $("#ok").prop('disabled', !ok);
+            }
+            function SetTessera(value) {
+                $("#tessera").val(value);
+                controllaDatiObbligatori();
+            }
+
+            $(function () {
+                $("#ok").on("click", () => tecno.vaiAvanti( $("#tessera").val(),$("#cartaSenior")[0].checked ) );
+                $("#back").on("click", () => tecno.vaiIndietro());
+                $("#privacy").on("click", () => tecno.mostraRegolamento($("#cartaSenior")[0].checked  ));
+                $("#camera").on("click", () => tecno.vaiCamera() );
+                $("input[type='radio']").on("click", ()=> {
+                   // SetTessera(tecno.getBaseTessera($("#cartaSenior")[0].checked,$("#tessera").val()));
+                });
+                $("input").focus(function () {
+                     var center = $(window).height() / 2;
+                     var top = $(this).offset().top;
+                     var dy = window.scrollY;
+                     console.log(this.id+" top:"+ top+" center:"+center+" dy:"+dy+ " -> "+(center+dy));
+                     if (top > (center+dy)) {
+                         $('html, body').animate({ scrollTop: top - center }, 'fast');
+                     }
+                 });
+
+
+                function SetPV(data) {
+                        var ele = $("#messaggio");
+                        var str = ele.html();
+                        str=str.replace(/{NOME NEGOZIO}/g,data.descrizione);
+                        str=str.replace(/{NOME CEDI ANCHE LUNGO}/g,data.cedi);
+                        ele.html(str);
+                        if(!("haCartaSenior" in data)) {
+                            data.haCartaSenior  = data.tipiTessere.indexOf(11)>=0;
+                        }
+                        if(data.haCartaSenior) {
+                            $("#parte_b_solo").hide();
+                        } else {
+                            $("#parte_b_senior").hide();
+                           // SetTessera(tecno.getBaseTessera($("#cartaSenior")[0].checked,""));
+                        }
+                    }
+                $.ajax({
+                    "url": "tl:/infoPV"
+                }).done(SetPV).fail(()=>{
+                    SetPV({"descrizione": "Punto Vendita di Debug", "cedi": "TecnoLogica Sviluppo", "tipiTessere": [1,11,13] });
+                });
+
+                $("#tessera").on('input',(e) => {
+                    // input serve per le caselle di testo
+                    controllaDatiObbligatori();
+                    tecno.DataWritten();
+                })/*.autocomplete({ 7/4/2020 tolto auto completamento nelle tessere
+                    minLength: 0,
+                    source: (request, response)=> {
+                        $.getJSON("tl:/carte", { senior: $("#cartaSenior")[0].checked, term: request.term }, response)
+                    },
+                    select: (e,ui) => {
+                        e.target.value=ui.item.label;
+                        controllaDatiObbligatori();
+                    }
+                })*/
+            });
+    </script>
+    </head>
+    <body>
+        <div id="parte_a">
+            <img id="back" src="ic_arrow_back.svg"  class="barBtn">
+            <div id="messaggio">
+                La sua carta sarà di proprietà del Centro di Distribuzione {NOME CEDI ANCHE LUNGO} che sarà contitolare insieme a Crai Secom S.p.a.
+                <br /><br />
+                Il suo negozio di riferimento è {NOME NEGOZIO}.
+            </div>
+        </div>
+        <div id="parte_b_solo">
+            <input id="cartaPiu1" type="radio" name="carta1" checked> <label for="cartaPiu1"></label>
+        </div>
+        <div id="parte_b_senior">
+            <input id="cartaPiu2" type="radio" name="carta2"> <label for="cartaPiu2"></label>
+            <input id="cartaSenior" type="radio" name="carta2"> <label for="cartaSenior"></label>
+
+        </div>
+        <div id="parte_c">
+            <input id="tessera" type="tel"  placeholder="0400000000000" class="error">
+            <img id="camera" src="ic_photo_camera.svg"  class="barBtn">
+            <div id="privacy"></div>
+        </div>
+        <p class="centra">
+            <input type="button" value="Procedi" id="ok" >
+        </p>
+        <div id="parte_d">
+        </div>
+    </body>
+</html>

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:labelFor="@id/messaggio"
+        android:text="@string/richiediMsg" />
+
+    <EditText
+        android:id="@+id/messaggio"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:layout_weight="1"
+        android:ems="10"
+        android:gravity="start|top"
+        android:inputType="textMultiLine"
+        android:lines="5" />
+
+    <LinearLayout
+        android:layout_gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <Button
+            android:id="@+id/annulla"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/richiediAnnulla" />
+
+        <Space
+            android:layout_width="20dp"
+            android:layout_height="match_parent"/>
+        <Button
+            android:id="@+id/invia"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:enabled="false"
+            android:text="@string/richiediOK" />
+    </LinearLayout>
+
+    <TextView android:id="@+id/inviaMsg"
+        android:layout_gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/colorAccent"
+        android:text="@string/richiediWarning" />
+</LinearLayout>

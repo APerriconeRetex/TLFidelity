@@ -1,0 +1,55 @@
+<!--
+  ~ Copyright 2018 The app Open Source Project
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~      http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <PreferenceCategory app:title="Web Service">
+
+        <com.retexspa.tecnologica.tlmoduloloyalty.TLEditTextPreference
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="textUri"
+            android:key="WSURL"
+            android:summary="a"
+            android:title="Web service URL"
+            android:defaultValue="http://10.86.2.166/TLFidelityWS"
+            android:visibility="visible" />
+
+        <com.retexspa.tecnologica.tlmoduloloyalty.TLEditTextPreference
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="textUri"
+            android:key="WSURLCentralizzato"
+            android:summary="a"
+            android:title="Web service URL Centralizzato"
+            android:defaultValue="http://tloyalty.crai.org/AppServer01/TLFidelityWS_Specialisti"
+            android:visibility="visible" />
+
+        <com.retexspa.tecnologica.tlmoduloloyalty.TLEditTextPreference
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:key="timeout"
+            android:inputType="number"
+            android:visibility="visible"
+            android:summary="a"
+            android:defaultValue="30"
+            android:title="Timeout" />
+
+    </PreferenceCategory>
+
+
+</PreferenceScreen>
